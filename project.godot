@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Global="*uid://dtsoicdy4nec"
 
+[display]
+
+mouse_cursor/custom_image="uid://6t5y8ceg4f8l"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
