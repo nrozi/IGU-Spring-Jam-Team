@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bfto5yx67yqjh"]
 
+[ext_resource type="Script" uid="uid://dme1oy2m3mvww" path="res://Scripts/character_body_2d.gd" id="1_23j0x"]
 [ext_resource type="Texture2D" uid="uid://bxf3qblcxsp7a" path="res://Assets/SpriteSheets/cat (1).png" id="1_hcucf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0xcsw"]
@@ -97,6 +98,7 @@ animations = [{
 [node name="Cat" type="Node2D" unique_id=832536270]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=883596643]
+script = ExtResource("1_23j0x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1171052612]
 texture_filter = 1
@@ -104,7 +106,7 @@ position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_eyw7o")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.29035738
+frame_progress = 0.6308929
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=402789792]
 visible = false

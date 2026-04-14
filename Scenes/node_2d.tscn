@@ -1,8 +1,12 @@
 [gd_scene format=4 uid="uid://c2aj3rk75uwd7"]
 
 [ext_resource type="Texture2D" uid="uid://bdmi5js7450pe" path="res://Assets/Tilesets/WIPTileMap.png" id="1_hh5uf"]
+[ext_resource type="Script" uid="uid://biw4667ef8na2" path="res://Scripts/node_2d.gd" id="1_u7krg"]
+[ext_resource type="TileSet" uid="uid://dridir7afux2r" path="res://Assets/Tilesets/tile_set.tres" id="2_6whob"]
 [ext_resource type="PackedScene" uid="uid://bfto5yx67yqjh" path="res://Scenes/cat.tscn" id="3_6whob"]
-[ext_resource type="Script" uid="uid://di7b638ujwgiq" path="res://Scenes/camera_2d.gd" id="4_6whob"]
+[ext_resource type="Script" uid="uid://di7b638ujwgiq" path="res://Scripts/camera_2d.gd" id="4_6whob"]
+[ext_resource type="Script" uid="uid://c8s3lu4e8in6b" path="res://Scenes/static_platforms.gd" id="4_tx0tn"]
+[ext_resource type="PackedScene" uid="uid://cki5k78cjwt8h" path="res://graph_point.tscn" id="5_wjtap"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7krg"]
 texture = ExtResource("1_hh5uf")
@@ -80,15 +84,24 @@ texture = ExtResource("1_hh5uf")
 8:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_tx0tn"]
-physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_u7krg")
 
-[node name="Node2D" type="Node2D" unique_id=1474039134]
+[node name="Node2D" type="Node2D" unique_id=1474039134 node_paths=PackedStringArray("map")]
+script = ExtResource("1_u7krg")
+map = NodePath("StaticPlatforms")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=471978585]
-texture_filter = 1
-tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAABAAAAAAABAAEAAAACAAAAAAABAAEAAAADAAAAAAABAAEAAAAEAAAAAAABAAEAAAD//wAAAAABAAEAAAD+/wAAAAABAAEAAAD9/wAAAAABAAEAAAD8/wAAAAABAAEAAAD7/wAAAAABAAEAAAD6////AAAAAAAAAAD6/wAAAAAAAAEAAAD7////AAABAAAAAAD8////AAABAAAAAAD9////AAABAAAAAAD+////AAABAAAAAAD/////AAABAAAAAAAAAP//AAABAAAAAAABAP//AAABAAAAAAACAP//AAABAAAAAAADAP//AAABAAAAAAAEAP//AAABAAAAAAAFAP//AAABAAAAAAAFAAAAAAABAAEAAAAGAP//AAACAAAAAAAGAAAAAAACAAEAAAA=")
+[node name="Background" type="TileMapLayer" parent="." unique_id=2007024325]
+tile_map_data = PackedByteArray("AAD8//3/AAAGAAUAAAD8//7/AAAGAAYAAAD8////AAAGAAcAAAD9//3/AAAHAAUAAAD9//7/AAAHAAYAAAD9////AAAHAAcAAAD+//3/AAAIAAUAAAD+//7/AAAIAAYAAAD+////AAAIAAcAAAAQAAIAAAAGAAIAAAA=")
 tile_set = SubResource("TileSet_tx0tn")
+
+[node name="StaticPlatforms" type="TileMapLayer" parent="." unique_id=471978585]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAMAAAABAAAAAAABAAMAAAACAAAAAAABAAMAAAADAAAAAAABAAMAAAAEAAAAAAABAAMAAAD//wAAAAABAAMAAAD+/wAAAAABAAMAAAD9/wAAAAABAAMAAAD8/wAAAAABAAMAAAD7/wAAAAABAAMAAAD6////AAABAAQAAAD6/wAAAAABAAQAAAD7////AAABAAAAAAD8////AAABAAAAAAD9////AAABAAAAAAD+////AAABAAAAAAD/////AAABAAAAAAAAAP//AAABAAAAAAABAP//AAABAAAAAAACAP//AAABAAAAAAADAP//AAABAAAAAAAEAP//AAABAAAAAAAFAP//AAABAAAAAAAFAAAAAAABAAMAAAAGAP//AAACAAAAAAAGAAAAAAAFAAMAAAAHAAEAAAAFAAMAAAAIAAIAAAAFAAMAAAAHAAIAAAAAAAcAAAAGAAEAAAAAAAcAAAAIAAEAAAAFAAIAAAAHAAAAAAAFAAIAAAAJAAMAAAABAAMAAAAIAAMAAAAAAAcAAAAKAAMAAAABAAMAAAALAAMAAAABAAMAAAAJAAIAAAABAAAAAAAKAAIAAAABAAAAAAALAAIAAAABAAAAAAAMAAIAAAABAAAAAAAMAAMAAAABAAMAAAANAAIAAAABAAAAAAANAAMAAAABAAMAAAAOAAIAAAABAAAAAAAOAAMAAAABAAMAAAAPAAIAAAABAAAAAAAPAAMAAAABAAMAAAAQAAIAAAABAAAAAAAQAAMAAAABAAMAAAARAAIAAAABAAAAAAARAAMAAAABAAMAAAD6//3/AAABAAAAAAD6//7/AAABAAMAAAD5//3/AAAAAAIAAAD5//7/AAAAAAMAAAD5////AAAAAAQAAAD5/wAAAAAAAAQAAAASAAAAAAABAAIAAAASAAEAAAABAAMAAAASAAIAAAABAAQAAAATAAAAAAACAAIAAAATAAEAAAACAAMAAAATAAIAAAACAAQAAAASAAMAAAABAAQAAAATAAMAAAACAAQAAAASAAQAAAABAAUAAAATAAQAAAACAAUAAAARAAQAAAABAAUAAAAQAAQAAAABAAUAAAAPAAQAAAABAAUAAAAOAAQAAAABAAUAAAANAAQAAAABAAUAAAAMAAQAAAABAAUAAAALAAQAAAABAAUAAAAKAAQAAAABAAUAAAAJAAQAAAABAAUAAAAFAAEAAAABAAUAAAAEAAEAAAABAAUAAAADAAEAAAABAAUAAAACAAEAAAABAAUAAAABAAEAAAABAAUAAAAAAAEAAAABAAUAAAD//wEAAAABAAUAAAD+/wEAAAABAAUAAAD9/wEAAAABAAUAAAD8/wEAAAABAAUAAAD7/wEAAAABAAUAAAD6/wEAAAABAAUAAAD5/wEAAAAAAAUAAAA=")
+tile_set = ExtResource("2_6whob")
+script = ExtResource("4_tx0tn")
+graph_point = ExtResource("5_wjtap")
+
+[node name="Cat" parent="." unique_id=832536270 instance=ExtResource("3_6whob")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=938768723]
 zoom = Vector2(2, 2)
@@ -96,5 +109,3 @@ process_callback = 0
 script = ExtResource("4_6whob")
 cam_speed = 0.5
 cam_lag = 0.8
-
-[node name="Cat" parent="." unique_id=832536270 instance=ExtResource("3_6whob")]
