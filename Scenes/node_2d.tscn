@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://boua24g84j3lt" path="res://Assets/Tilesets/teamtilemap.png" id="1_hh5uf"]
 [ext_resource type="Texture2D" uid="uid://bop5seacgnd2l" path="res://Assets/SpriteSheets/PC1idle-Sheet-Sheet.png" id="2_6whob"]
 [ext_resource type="Texture2D" uid="uid://kfrnj045n08a" path="res://Assets/SpriteSheets/PC1walk-Sheet.png" id="3_u7krg"]
+[ext_resource type="Script" uid="uid://di7b638ujwgiq" path="res://Scenes/camera_2d.gd" id="4_6whob"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tx0tn"]
 texture = ExtResource("1_hh5uf")
@@ -73,7 +74,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -84,7 +85,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run",
-"speed": 2.0
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_he4j0"]
@@ -104,7 +105,7 @@ scale = Vector2(4, 4)
 texture_filter = 1
 position = Vector2(0, -2.055)
 sprite_frames = SubResource("SpriteFrames_p20hg")
-animation = &"Run"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2131243036]
@@ -112,3 +113,6 @@ position = Vector2(0, -0.195)
 shape = SubResource("CircleShape2D_he4j0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=938768723]
+zoom = Vector2(0.5, 0.5)
+process_callback = 0
+script = ExtResource("4_6whob")
