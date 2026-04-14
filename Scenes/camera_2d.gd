@@ -1,7 +1,7 @@
 extends Camera2D
 
 @export var cam_speed: float = 1
-@export var cam_lag = 1
+@export var cam_lag: float = 1
 var velocity: Vector2
 
 func _ready() -> void:
