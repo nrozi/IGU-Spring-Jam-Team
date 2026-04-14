@@ -107,5 +107,5 @@ graph_point = ExtResource("5_wjtap")
 zoom = Vector2(2, 2)
 process_callback = 0
 script = ExtResource("4_6whob")
-cam_speed = 0.5
-cam_lag = 0.8
+cam_speed = 0.3
+cam_lag = 0.3
