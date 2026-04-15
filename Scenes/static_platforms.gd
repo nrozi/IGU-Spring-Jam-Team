@@ -1,7 +1,6 @@
 extends TileMapLayer
 
 var is_position_point: bool
-var point_id
 var pos: Vector2
 var a_star_graph: AStar2D = AStar2D.new()
 var used_tiles: Array[Vector2i]
@@ -14,13 +13,13 @@ var graph_point_inst
 @export var graph_point: PackedScene
 
 class point_info:
-	var point_id
 	var pos
 	var is_fall_tile: bool
 	var is_left_edge: bool
 	var is_right_edge: bool
 	var is_left_wall: bool
 	var is_right_wall: bool
+	var point_id: float
 	func _init(point_id, pos) -> void:
 		self.point_id = point_id
 		self.pos = pos	

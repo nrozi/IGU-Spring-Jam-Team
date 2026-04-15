@@ -1,5 +1,9 @@
 [gd_scene format=3 uid="uid://cki5k78cjwt8h"]
 
+[ext_resource type="Texture2D" uid="uid://ccvw3fg5yiohp" path="res://Assets/Images/marker.png" id="1_4m6gw"]
+
 [node name="GraphPoint" type="Node2D" unique_id=152823544]
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=1388580109]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1039105729]
+position = Vector2(16, 16)
+texture = ExtResource("1_4m6gw")
