@@ -11,6 +11,8 @@ var graph_point_inst
 @export var cell_empty = -1
 @export var max_tile_fall_scan_depth = 500
 @export var graph_point: PackedScene
+@export var jump_distance: float = 5
+@export var jump_height: float = 4
 
 class point_info:
 	var pos
@@ -145,9 +147,53 @@ func purge_non_obstacles():
 			used_tiles.erase(tile)
 			
 func connect_points():
-	pass
+	for p1 in point_info_list:
+		connect_horizontal_points(p1)
 	
-func connect_horizontal_points():
-	pass
-func draw_debug_line():
-	pass
+func _draw() -> void:
+	if show_debug_graph:
+		connect_points()
+	
+func connect_horizontal_points(p1: point_info):
+	if p1.is_left_edge or p1.is_left_wall:
+		var closest
+		for p2 in point_info_list:
+			if p1.point_id == p2.point_id:
+				continue
+			if (p2.is_right_edge or p2.is_right_wall) && p2.pos.y == p1.pos.y && p2.pos.x > p1.pos.x:
+				if closest == null:
+					closest = point_info.new(p2.point_id, p2.pos)
+				if p2.pos.x < closest.pos.x:
+					closest.pos = p2.pos
+					closest.point_id = p2.point_id
+		if closest != null:
+			if !horizontal_connection_cannot_be_made(p1.pos, closest.pos):
+				a_star_graph.connect_points(p1.point_id, closest.point_id)
+				draw_debug_line(p1.pos, closest.pos, Color.RED)
+
+func draw_debug_line(to: Vector2, from: Vector2, color: Color):
+	if show_debug_graph:
+		draw_line(to, from, color)
+
+func horizontal_connection_cannot_be_made(p1: Vector2i, p2: Vector2i) -> bool:
+	var start_scan: Vector2i = local_to_map(p1)
+	var end_scan: Vector2i = local_to_map(p2)
+	for i in range(start_scan.x, end_scan.x):
+		if get_cell_source_id(Vector2i(i, start_scan.y)) != cell_empty or get_cell_source_id(Vector2i(i, start_scan.y + 1)) == cell_empty:
+			return true
+	return false
+
+func connect_jump_points(p1: point_info):
+	for p2 in point_info_list:
+		connect_horizontal_platform_jumps(p1, p2)
+		
+func connect_horizontal_platform_jumps(p1: point_info, p2: point_info):
+	if p1.point_id == p2.point_id:
+		return
+	if p2.pos.y == p1.pos.y && p1.is_right_edge && p2.is_left_edge:
+		if p2.pos.x > p1.pos.x:
+			var p2_map = local_to_map(p2.pos)
+			var p1_map = local_to_map(p1.pos)
+			if p2_map.distance_to(p1_map) < jump_distance + 1:
+				a_star_graph.connect_points(p1.point_id, p2.point_id)
+				draw_debug_line(p1.pos, p2.pos, Color.DEEP_PINK)
